@@ -1,5 +1,7 @@
-package com.projetowebservice.course;
+package com.projetowebservice.course.service;
 
+import com.projetowebservice.course.entities.User;
+import com.projetowebservice.course.repositories.UserRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
