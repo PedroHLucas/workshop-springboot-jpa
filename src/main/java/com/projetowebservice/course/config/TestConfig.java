@@ -2,10 +2,12 @@ package com.projetowebservice.course.config;
 
 import com.projetowebservice.course.entities.Category;
 import com.projetowebservice.course.entities.Order;
+import com.projetowebservice.course.entities.Products;
 import com.projetowebservice.course.entities.User;
 import com.projetowebservice.course.entities.enums.OrderStatus;
 import com.projetowebservice.course.repositories.CategoryRepositories;
 import com.projetowebservice.course.repositories.OrderRepository;
+import com.projetowebservice.course.repositories.ProductRepositories;
 import com.projetowebservice.course.repositories.UserRepositories;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepositories categoryRepositories;
 
+    @Autowired
+    private ProductRepositories productRepositories;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -44,9 +49,16 @@ public class TestConfig implements CommandLineRunner {
         Category cat1 = new Category(null, "Eletronics");
         Category cat2 = new Category(null, "Books");
         Category cat3 = new Category(null, "Compurtes");
+
+
+        Products p1 = new Products(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Products p2 = new Products(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Products p3 = new Products(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Products p4 = new Products(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Products p5 = new Products(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
         
         categoryRepositories.saveAll(Arrays.asList(cat1, cat2, cat3));
-
+        productRepositories.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 
 
 
