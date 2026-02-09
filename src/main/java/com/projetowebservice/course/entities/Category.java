@@ -1,10 +1,7 @@
 package com.projetowebservice.course.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,6 +18,8 @@ public class Category implements Serializable {
 
     private String name;
 
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     private Set<Products> products = new HashSet<>();
 
     public Category() {
