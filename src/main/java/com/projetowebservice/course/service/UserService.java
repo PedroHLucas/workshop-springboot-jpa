@@ -1,11 +1,15 @@
 package com.projetowebservice.course.service;
 
 import com.projetowebservice.course.entities.User;
+import com.projetowebservice.course.exceptions.DatabaseException;
 import com.projetowebservice.course.exceptions.ResourceNotFoundedException;
 import com.projetowebservice.course.repositories.UserRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +32,13 @@ public class UserService {
     }
 
     public void delete(Long id){
-        repositories.deleteById(id);
+        try {
+            repositories.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundedException(id);
+        }catch (DataIntegrityViolationException e ){
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj){
