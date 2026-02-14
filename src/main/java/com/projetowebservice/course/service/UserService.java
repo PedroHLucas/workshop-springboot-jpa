@@ -4,6 +4,7 @@ import com.projetowebservice.course.entities.User;
 import com.projetowebservice.course.exceptions.DatabaseException;
 import com.projetowebservice.course.exceptions.ResourceNotFoundedException;
 import com.projetowebservice.course.repositories.UserRepositories;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -42,9 +43,13 @@ public class UserService {
     }
 
     public User update(Long id, User obj){
+        try{
         User entity = repositories.getReferenceById(id);
         updateData(entity, obj);
         return repositories.save(entity);
+    } catch (EntityNotFoundException e ){
+            throw new ResourceNotFoundedException(id);
+        }
     }
 
     private void updateData(User entity, User obj) {
