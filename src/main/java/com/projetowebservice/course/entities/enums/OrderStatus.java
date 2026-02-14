@@ -13,6 +13,7 @@ public enum OrderStatus {
 
     private OrderStatus(int code){
         this.code = code;
+
     }
 
     public int getCode(){
